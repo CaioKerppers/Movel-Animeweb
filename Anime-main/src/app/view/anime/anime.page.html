@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button size="small" shape="round" (click)="voltar()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>Anime</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-toggle (ionChange)="habilitar()">Habilitar Edição</ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-button size="default" color="success" shape="round" disabled="{{edicao}}">
+        <input type="file" (change)="uploadFile($event.target)" />
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Nome" placeholder="Insira o nome" [(ngModel)]="nome" disabled="{{edicao}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Estudio" placeholder="Insira o nome do estudio" [(ngModel)]="estudio" disabled="{{edicao}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Data de Lançamento" placeholder="Insira a data de lençamento" type="date" [(ngModel)]="datalancamento" disabled="{{edicao}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Temporadas" placeholder="Insira a quantidade de temporadas" type="number" [(ngModel)]="temporada" disabled="{{edicao}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Episodios" placeholder="Insira a quantidade de episodios" type="number"[(ngModel)]="episodios" disabled="{{edicao}}"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="editar()" disabled="{{edicao}}">Salvar</ion-button>
+    <ion-button expand="block" color="danger" (click)="confirmAlert()" disabled="{{edicao}}">Excluir</ion-button>
+  </ion-list>
+</ion-content>
