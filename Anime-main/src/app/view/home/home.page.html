@@ -1,14 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Anime
+      ANIME
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor="let catalogo of catalogo">
-    <ion-item (click)="AnimeDetalhes(catalogo)">
+  <ion-list *ngFor="let catalogo of catalogo" lines="none"> 
+    <ion-item (click)="AnimeDetalhes(catalogo)" class="itemCatalogo">
       <ion-avatar *ngIf="catalogo.downloadURL != null">
         <img src="{{catalogo.downloadURL}}"/>
       </ion-avatar>
@@ -16,7 +16,7 @@
         <img src="assets/avatar.png"/>
       </ion-avatar>
       <ion-label text-wrap style="margin-left: 10px">
-        <h3>{{catalogo.nome}}</h3>
+        <h2>{{catalogo.nome}}</h2>
       </ion-label>
     </ion-item>
   </ion-list>

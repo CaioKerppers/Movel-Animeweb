@@ -1,27 +1,16 @@
-#container {
+
+.itemCatalogo{
+  border: 2px solid rgb(80, 79, 79);
+  border-radius: 12px;
+  padding: 5px;
+
+}
+
+ion-toolbar{
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  border-style: solid;
+  border-radius: 10px;
+  color: #190933;
+  border-color: #665687;
+  --background: #B084CC;
 }
