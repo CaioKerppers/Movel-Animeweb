@@ -15,7 +15,9 @@
       <ion-avatar *ngIf="catalogo.downloadURL == null">
         <img src="assets/avatar.png"/>
       </ion-avatar>
-      <ion-label style="margin-left: 5%;">{{catalogo.nome}}</ion-label>
+      <ion-label text-wrap style="margin-left: 10px">
+        <h3>{{catalogo.nome}}</h3>
+      </ion-label>
     </ion-item>
   </ion-list>
 
