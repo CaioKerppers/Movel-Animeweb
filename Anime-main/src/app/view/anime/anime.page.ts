@@ -19,6 +19,7 @@ export class AnimePage implements OnInit {
   episodios!: number;
   estudio!: string;
   edicao: boolean = true;
+  downloadURL: any;
   imagem! : any;
 
   constructor(private alertController: AlertController,  private router: Router, private firebase: FirebaseService) { }
@@ -31,6 +32,7 @@ export class AnimePage implements OnInit {
     this.episodios = this.catalogo.episodios;
     this.estudio = this.catalogo.estudio;
     this.id = this.catalogo.id
+    this.downloadURL = this.catalogo.downloadURL;
   }
 
   editar(){

@@ -6,27 +6,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+  <ion-list class="add-form">
     <ion-item>
       <ion-input label="Nome" placeholder="Insira o nome" [(ngModel)]="nome"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-button size="default" color="success" shape="round" >
-        <input type="file"  (change)="uploadFile($event.target)" />
+      <ion-button size="default" color="success" shape="round">
+        <input type="file" (change)="uploadFile($event.target)" />
       </ion-button>
     </ion-item>
-    <ion-item>
-      <ion-input label="Estudio" placeholder="Insira o nome do estudio" [(ngModel)]="estudio"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="date" label="Data Lançamento" placeholder="Data de Lançamento" [(ngModel)]="datalancamento"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="number" label="Temporada" placeholder="Nº de temporadas" [(ngModel)]="temporada"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="number" label="Episodios" placeholder="Nº de episodios" [(ngModel)]="episodios"></ion-input>
-    </ion-item>
+    <!-- Mais campos para inserir informações do anime -->
     <ion-button expand="block" (click)="addanime()">Adicionar Anime</ion-button>
   </ion-list>
 </ion-content>

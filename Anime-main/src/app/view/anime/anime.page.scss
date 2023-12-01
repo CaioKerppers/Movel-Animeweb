@@ -1,0 +1,72 @@
+page-anime-details {
+    .anime-header {
+      background-image: url('../../../assets/header.jpg');
+      background-size: cover;
+      // Outros estilos para o cabeçalho do anime
+    }
+    
+    .anime-info {
+      .title {
+        font-size: 24px;
+        color: #ff9900;
+        // Estilos para o título do anime
+      }
+      
+      .synopsis {
+        font-size: 16px;
+        color: #333;
+        // Estilos para a sinopse
+      }
+      
+      .ratings {
+        .score {
+          font-size: 18px;
+          color: #ff9900;
+          // Estilos para a pontuação
+        }
+      }
+      
+      .actions {
+        button {
+          background-color: #ff9900;
+          color: #fff;
+          border-radius: 4px;
+          // Estilos para os botões
+        }
+      }
+      
+      .edit-form {
+        display: none; // Oculta o formulário de edição inicialmente
+        // Estilos para o formulário de edição
+        ion-input {
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          // Outros estilos para os campos de input
+        }
+        
+        ion-button {
+          background-color: #ff9900;
+          color: #fff;
+          border-radius: 4px;
+          // Estilos para os botões
+        }
+      }
+    }
+    
+    // Adicione classes específicas para a visualização e edição
+    &.editing {
+      .anime-info {
+        .edit-form {
+          display: block; // Exibe o formulário de edição ao adicionar a classe "editing"
+        }
+        
+        .title,
+        .synopsis,
+        .ratings,
+        .actions {
+          display: none; // Oculta as informações do anime ao editar
+        }
+      }
+    }
+  }
+  
