@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Catalogo } from 'src/app/model/entities/Catalogo';
+import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 export class HomePage {
   catalogo: Catalogo[] = [];
 
-  constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService) {
+  constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService, private auth: AuthService) {
     this.firebase.read().subscribe(res =>{
       this.catalogo = res.map(catalogo =>{
         return{
@@ -27,10 +28,14 @@ export class HomePage {
     this.router.navigate(['/adicionar']);
   }
 
-  
-
   AnimeDetalhes(catalogo : Catalogo){
     this.router.navigateByUrl("/anime", {state : {catalogo:catalogo}});
+  }
+
+  logout(){
+    this.auth.signOut().then((res) => {
+      this.router.navigate(["signin"]);
+    })
   }
 }
 
