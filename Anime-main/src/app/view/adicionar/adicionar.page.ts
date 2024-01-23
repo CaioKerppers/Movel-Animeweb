@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Catalogo } from 'src/app/model/entities/Catalogo';
+import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 
 @Component({
@@ -11,7 +12,6 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 })
 export class AdicionarPage implements OnInit {
 
-  constructor(private router : Router, private firebase: FirebaseService, private alertController: AlertController) { }
   temporada!: number;
   nome!: string;
   datalancamento!: Date;
@@ -19,6 +19,11 @@ export class AdicionarPage implements OnInit {
   episodios!: number;
   estudio!: string;
   id!: string;
+  user!: any;
+
+  constructor(private router : Router, private firebase: FirebaseService, private alertController: AlertController, private authService: AuthService) {
+    this.user = this.authService.getUsuarioLogado();
+  }
 
   ngOnInit() {
   }
@@ -26,6 +31,7 @@ export class AdicionarPage implements OnInit {
   addanime(){
     if(this.nome && this.temporada && this.datalancamento && this.episodios && this.estudio){
       let novo : Catalogo = new Catalogo(this.nome, this.temporada , this.datalancamento, this.episodios, this.estudio, this.id);
+      novo.uid = this.user.uid;
       if(this.imagem){
         this.firebase.uploadImage(this.imagem, novo);
       }else{

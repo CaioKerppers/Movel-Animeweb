@@ -36,7 +36,7 @@ export class SigninPage implements OnInit {
 
   submitForm() : boolean {
     if (!this.formLogar.valid) {
-      this.presentAlert("Agenda", "Logar", "Todos os Campos são Obrigatórios!");
+      this.presentAlert("Anime", "Logar", "Todos os Campos são Obrigatórios!");
       return false;
     } else {
       this.logar()
@@ -55,7 +55,16 @@ export class SigninPage implements OnInit {
     })
   }
 
-  public logarComGoogle() : void{ }
+  public logarComGoogle() : void{
+    this.authService.signInWithGoogle()
+    .then((res) => {
+      this.presentAlert("Anime", "Logar", "Seja Bem vindo!");
+      this._router.navigate(["/home"]);
+    }).catch((error) => {
+      this.presentAlert("Anime", "Logar", "Erro ao logar, Tente Novamente!");
+      console.log(error.message)
+    })
+  }
 
   public irParaSignUp() : void{
     this._router.navigate(["/signup"]);

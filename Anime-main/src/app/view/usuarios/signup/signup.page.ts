@@ -43,6 +43,7 @@ export class SignupPage implements OnInit {
       return false;
     } else {
       this.cadastrar()
+      return true;
     }
   }
 

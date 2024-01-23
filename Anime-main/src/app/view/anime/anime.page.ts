@@ -21,6 +21,7 @@ export class AnimePage implements OnInit {
   edicao: boolean = true;
   downloadURL: any;
   imagem! : any;
+  user! : any;
 
   constructor(private alertController: AlertController,  private router: Router, private firebase: FirebaseService) { }
 
@@ -38,6 +39,7 @@ export class AnimePage implements OnInit {
   editar(){
     let novo: Catalogo = new Catalogo(this.nome, this.temporada, this.datalancamento, this.episodios, this.estudio, this.id);
     novo.id = this.catalogo.id;
+    novo.uid = this.user.uid;
     if(this.imagem){
       this.firebase.uploadImage(this.imagem, novo);
     }else{
@@ -49,7 +51,7 @@ export class AnimePage implements OnInit {
 
   async presentAlert(subHeader : string, message : string) {
     const alert = await this.alertController.create({
-      header: 'Agenda de Contados',
+      header: 'Animes',
       subHeader: subHeader,
       message: message,
       buttons: ['OK'],
@@ -59,7 +61,7 @@ export class AnimePage implements OnInit {
 
   async confirmAlert(){
     const alert = await this.alertController.create({
-      header: 'Agenda de Contados',
+      header: 'Animes',
       subHeader: 'ATENÇÃO',
       message: 'Deseja mesmo excluir o Catalogo?',
       buttons: [{
