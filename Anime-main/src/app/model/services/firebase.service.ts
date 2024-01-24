@@ -13,25 +13,26 @@ export class FirebaseService {
   constructor(private firestore: AngularFirestore, private storage : AngularFireStorage) { }
 
   create(catalogo: Catalogo){
-    return this.firestore.collection(this.PATH).add({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio});
+    return this.firestore.collection(this.PATH).add({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio, uid: catalogo.uid});
   }
 
   createWithAvatar(catalogo: Catalogo){
     return this.firestore.collection(this.PATH)
-    .add({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio, downloadURL : catalogo.downloadURL});
+    .add({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio, downloadURL: catalogo.downloadURL});
   }
 
-  read(){
-    return this.firestore.collection(this.PATH).snapshotChanges();
+  read(uid: string){
+    return this.firestore.collection(this.PATH,
+      ref => ref.where('uid', '==', uid)).snapshotChanges();
   }
 
   update(catalogo: Catalogo){
-    return this.firestore.collection(this.PATH).doc(catalogo.id).update({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio});
+    return this.firestore.collection(this.PATH).doc(catalogo.id).update({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio: catalogo.estudio, uid:catalogo.uid});
   }
 
   updateWithAvatar(catalogo: Catalogo, id: string){
     return this.firestore.collection(this.PATH).doc(id)
-    .update({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio, downloadURL : catalogo.downloadURL});
+    .update({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio, uid: catalogo.uid, downloadURL: catalogo.downloadURL});
   }
 
   delete(catalogo: Catalogo){
