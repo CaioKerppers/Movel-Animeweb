@@ -1,11 +1,12 @@
 export class Catalogo{
-    private _id!: string;
+    private _id: string;
     private _temporada: number;
     private _nome: string;
     private _datalancamento: Date;
     private _episodios: number;
     private _estudio: string;
-    private _downloadURL: any; 
+    private _downloadURL: any;
+    private _uid!: string;
     
     constructor(nome : string, temporada: number, datalancamento: Date, episodios: number, estudio: string, id : string){
         this._datalancamento = datalancamento;
@@ -66,6 +67,13 @@ export class Catalogo{
         this._downloadURL = downloadURL;
     }
 
+    get uid(): string{
+        return this._uid;
+    }
+
+    set uid(uid : string){
+        this._uid = uid;
+    }
 
 }
 
