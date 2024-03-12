@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      ANIME
+    </ion-title>
+    <ion-button (click)="logout()">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let catalogo of catalogo" lines="none"> 
+    <ion-item (click)="AnimeDetalhes(catalogo)">
+      <ion-avatar *ngIf="catalogo.downloadURL != null">
+        <img src="{{catalogo.downloadURL}}"/>
+      </ion-avatar>
+      <ion-avatar *ngIf="catalogo.downloadURL == null">
+        <img src="assets/avatar.png"/>
+      </ion-avatar>
+      <ion-label text-wrap style="margin-left: 10px">
+        <h2>{{catalogo.nome}}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-fab horizontal="end" vertical="bottom">
+    <ion-fab-button (click)="RedirecionarParaAdicionar()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
