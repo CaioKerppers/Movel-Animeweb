@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-import { Catalogo } from '../entities/Catalogo';
+import { Anime } from '../entities/Anime';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,13 @@ export class FirebaseService {
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
 
-  create(catalogo: Catalogo){
-    return this.firestore.collection(this.PATH).add({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio, uid: catalogo.uid});
+  create(anime: Anime){
+    return this.firestore.collection(this.PATH).add({nome: anime.nome, temporada: anime.temporada, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, uid: anime.uid});
   }
 
-  createWithAvatar(catalogo: Catalogo){
+  createWithAvatar(anime: Anime){
     return this.firestore.collection(this.PATH)
-    .add({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio, downloadURL: catalogo.downloadURL});
+    .add({nome: anime.nome, temporada: anime.temporada, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, downloadURL: anime.downloadURL});
   }
 
   read(uid: string){
@@ -28,38 +28,38 @@ export class FirebaseService {
       ref => ref.where('uid', '==', uid)).snapshotChanges();
   }
 
-  update(catalogo: Catalogo){
-    return this.firestore.collection(this.PATH).doc(catalogo.id).update({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio: catalogo.estudio, uid:catalogo.uid});
+  update(anime: Anime){
+    return this.firestore.collection(this.PATH).doc(anime.id).update({nome: anime.nome, temporada: anime.temporada, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio: anime.estudio, uid:anime.uid});
   }
 
-  updateWithAvatar(catalogo: Catalogo, id: string){
+  updateWithAvatar(anime: Anime, id: string){
     return this.firestore.collection(this.PATH).doc(id)
-    .update({nome: catalogo.nome, temporada: catalogo.temporada, datalancamento: catalogo.datalancamento, episodios: catalogo.episodios, estudio:catalogo.estudio, uid: catalogo.uid, downloadURL: catalogo.downloadURL});
+    .update({nome: anime.nome, temporada: anime.temporada, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, uid: anime.uid, downloadURL: anime.downloadURL});
   }
 
-  delete(catalogo: Catalogo){
-    return this.firestore.collection(this.PATH).doc(catalogo.id).delete();
+  delete(anime: Anime){
+    return this.firestore.collection(this.PATH).doc(anime.id).delete();
   }
 
 
-  uploadImage(imagem: any, catalogo: Catalogo): void {
+  uploadImage(imagem: any, anime: Anime): void {
     const file = imagem.item(0);
     if (file.type.split('/')[0] !== 'image') {
       console.error('Tipo não Suportado!');
       return;
     }
-    const path = `images/${catalogo.nome}_${file.name}`;
+    const path = `images/${anime.nome}_${file.name}`;
     const fileRef = this.storage.ref(path);
     const task = this.storage.upload(path, file);
     task.snapshotChanges().pipe(
       finalize(() => {
         const uploadFileURL = fileRef.getDownloadURL();
         uploadFileURL.subscribe(resp => {
-          catalogo.downloadURL = resp;
-          if (!catalogo.id) {
-            this.createWithAvatar(catalogo);
+          anime.downloadURL = resp;
+          if (!anime.id) {
+            this.createWithAvatar(anime);
           } else {
-            this.updateWithAvatar(catalogo, catalogo.id);
+            this.updateWithAvatar(anime, anime.id);
           }
         })
       })
@@ -67,17 +67,17 @@ export class FirebaseService {
   }
 
   // Método para realizar uma pesquisa
-  search(term: string): Observable<Catalogo[]> {
-    return this.firestore.collection<Catalogo>(this.PATH, ref =>
+  search(term: string): Observable<Anime[]> {
+    return this.firestore.collection<Anime>(this.PATH, ref =>
       ref.orderBy('nome')
          .startAt(term)
          .endAt(term + '\uf8ff')
     ).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as Catalogo;
+          const data = a.payload.doc.data() as Anime;
           const id = a.payload.doc.id;
-          return { id, ...data } as Catalogo; // Convertendo para o tipo Catalogo
+          return { id, ...data } as Anime; // Convertendo para o tipo anime
         });
       })
     );

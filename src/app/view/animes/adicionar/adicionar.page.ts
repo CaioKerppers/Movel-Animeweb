@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Catalogo } from 'src/app/model/entities/Catalogo';
+import { Anime } from 'src/app/model/entities/Anime';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 
@@ -30,7 +30,7 @@ export class AdicionarPage implements OnInit {
 
   addanime(){
     if(this.nome && this.temporada && this.datalancamento && this.episodios && this.estudio){
-      let novo : Catalogo = new Catalogo(this.nome, this.temporada , this.datalancamento, this.episodios, this.estudio, this.id);
+      let novo : Anime = new Anime(this.nome, this.temporada , this.datalancamento, this.episodios, this.estudio, this.id);
       novo.uid = this.user.uid;
       if(this.imagem){
         this.firebase.uploadImage(this.imagem, novo);

@@ -1,4 +1,4 @@
-export class Catalogo {
+export class Anime {
     private _id: string;
     private _temporada: number;
     private _nome: string;
@@ -7,7 +7,6 @@ export class Catalogo {
     private _estudio: string;
     private _downloadURL: any;
     private _uid!: string;
-genero: any;
   
     constructor(nome: string, temporada: number, datalancamento: Date, episodios: number, estudio: string, id: string) {
       this._datalancamento = datalancamento;

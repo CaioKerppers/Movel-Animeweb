@@ -10,18 +10,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let catalogo of catalogo" lines="none"> 
-    <ion-item (click)="AnimeDetalhes(catalogo)">
-      <ion-avatar *ngIf="catalogo.downloadURL != null">
-        <img src="{{catalogo.downloadURL}}"/>
-      </ion-avatar>
-      <ion-avatar *ngIf="catalogo.downloadURL == null">
-        <img src="assets/avatar.png"/>
-      </ion-avatar>
-      <ion-label text-wrap style="margin-left: 10px">
-        <h2>{{catalogo.nome}}</h2>
-      </ion-label>
-    </ion-item>
+  <ion-list lines="none"> 
+    <ion-item-group>
+      <app-animes *ngFor="let anime of animes"
+      [anime]="anime"
+      (click)="AnimeDetalhes(anime)"></app-animes>
+    </ion-item-group>
   </ion-list>
 
 
