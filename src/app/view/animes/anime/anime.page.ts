@@ -13,7 +13,7 @@ export class AnimePage implements OnInit {
 
   id! : string;
   anime!: Anime;
-  temporada!: number;
+  temporadas!: number;
   nome!: string;
   datalancamento!: Date;
   episodios!: number;
@@ -27,7 +27,7 @@ export class AnimePage implements OnInit {
 
   ngOnInit() {
     this.anime = history.state.anime;
-    this.temporada = this.anime.temporada;
+    this.temporadas = this.anime.temporadas;
     this.nome = this.anime.nome;
     this.datalancamento = this.anime.datalancamento;
     this.episodios = this.anime.episodios;
@@ -37,7 +37,7 @@ export class AnimePage implements OnInit {
   }
 
   editar(){
-    let novo: Anime = new Anime(this.nome, this.temporada, this.datalancamento, this.episodios, this.estudio, this.id);
+    let novo: Anime = new Anime(this.nome, this.estudio, this.datalancamento, this.temporadas, this.episodios);
     novo.id = this.anime.id;
     novo.uid = this.user.uid;
     if(this.imagem){

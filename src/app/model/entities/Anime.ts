@@ -1,6 +1,6 @@
 export class Anime {
     private _id: string;
-    private _temporada: number;
+    private _temporadas: number;
     private _nome: string;
     private _datalancamento: Date;
     private _episodios: number;
@@ -8,13 +8,12 @@ export class Anime {
     private _downloadURL: any;
     private _uid!: string;
   
-    constructor(nome: string, temporada: number, datalancamento: Date, episodios: number, estudio: string, id: string) {
-      this._datalancamento = datalancamento;
-      this._episodios = episodios;
+    constructor(nome: string, estudio: string, datalancamento: Date, temporadas: number, episodios: number) {
       this._nome = nome;
-      this._temporada = temporada;
       this._estudio = estudio;
-      this._id = id;
+      this._datalancamento = datalancamento;
+      this._temporadas = temporadas;
+      this._episodios = episodios;
     }
   
     get id(): string {
@@ -24,11 +23,11 @@ export class Anime {
       this._id = value;
     }
   
-    get temporada(): number {
-      return this._temporada;
+    get temporadas(): number {
+      return this._temporadas;
     }
-    set temporada(value: number) {
-      this._temporada = value;
+    set temporadas(value: number) {
+      this._temporadas = value;
     }
   
     get nome(): string {
