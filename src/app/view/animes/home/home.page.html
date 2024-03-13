@@ -10,7 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-list lines="none"> 
+
+  <app-loading *ngIf="isLoading"></app-loading>
+  <ion-list lines="none" *ngIf="!isLoading"> 
     <ion-item-group>
       <app-animes *ngFor="let anime of animes"
       [anime]="anime"
