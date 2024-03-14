@@ -1,11 +1,15 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-button size="small" shape="round" (click)="voltar()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
-    <ion-title>Anime</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Adicionar Anime</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="primary">
   <ion-list>
     <app-anime-input
     [animeForm]="animeForm"

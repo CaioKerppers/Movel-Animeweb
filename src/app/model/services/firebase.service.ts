@@ -16,12 +16,10 @@ export class FirebaseService {
 
   create(anime: Anime){
     return this.firestore.collection(this.PATH).add({nome: anime.nome, temporadas: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, uid: anime.uid});
-  }
 
   createWithAvatar(anime: Anime){
     return this.firestore.collection(this.PATH)
     .add({nome: anime.nome, temporadas: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, downloadURL: anime.downloadURL});
-  }
 
   read(uid: string){
     return this.firestore.collection(this.PATH,
@@ -30,12 +28,10 @@ export class FirebaseService {
 
   update(anime: Anime){
     return this.firestore.collection(this.PATH).doc(anime.id).update({nome: anime.nome, temporadas: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio: anime.estudio, uid:anime.uid});
-  }
 
   updateWithAvatar(anime: Anime, id: string){
     return this.firestore.collection(this.PATH).doc(id)
     .update({nome: anime.nome, temporadas: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, uid: anime.uid, downloadURL: anime.downloadURL});
-  }
 
   delete(anime: Anime){
     return this.firestore.collection(this.PATH).doc(anime.id).delete();
@@ -66,7 +62,6 @@ export class FirebaseService {
     ).subscribe();
   }
 
-  // Método para realizar uma pesquisa
   search(term: string): Observable<Anime[]> {
     return this.firestore.collection<Anime>(this.PATH, ref =>
       ref.orderBy('nome')

@@ -14,7 +14,6 @@ export class AnimeInputComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {}
-
   submitForm(){
     if(this.animeForm.valid){
       this.submit.emit(this.animeForm);

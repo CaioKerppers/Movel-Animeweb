@@ -31,6 +31,10 @@ export class HomePage implements OnInit{
     })
   }
 
+  redirecionarParaPesquisa() {
+    this.router.navigate(['/search']);
+  }
+
   RedirecionarParaAdicionar(){
     this.router.navigate(['/adicionar']);
   }

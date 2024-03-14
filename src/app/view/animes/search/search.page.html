@@ -1,10 +1,15 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="paraHome()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Pesquisar Animes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding color="primary">
   <ion-searchbar (ionChange)="onSearchChange($event)" debounce="500" [(ngModel)]="query" placeholder="Digite para pesquisar"></ion-searchbar>
 
   <ion-list *ngIf="animes.length > 0">
@@ -19,7 +24,7 @@
     </ion-item>
   </ion-list>
 
-  <!--<app-empty-screen *ngIf="animes.length === 0 && !isLoading" [title]="model.title"></app-empty-screen>-->
+  <app-empty-screen *ngIf="animes.length === 0 && !isLoading" [title]="model.title"></app-empty-screen>
   
   <ion-spinner *ngIf="isLoading"></ion-spinner>
 </ion-content>

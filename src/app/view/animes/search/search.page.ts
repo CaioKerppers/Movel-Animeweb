@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Anime } from 'src/app/model/entities/Anime';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -17,11 +18,15 @@ export class SearchPage implements OnInit {
     title: 'Nenhum anime encontrado.'
   };
 
-  constructor(private firebaseService: FirebaseService) {
+  constructor(private firebaseService: FirebaseService,private router : Router) {
     setTimeout(() => { this.sInput.setFocus(); }, 500);
   }
 
   ngOnInit() {
+  }
+
+  paraHome() {
+    this.router.navigate(['/home']);
   }
 
   async onSearchChange(event) {

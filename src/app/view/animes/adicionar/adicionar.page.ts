@@ -70,4 +70,14 @@ export class AdicionarPage implements OnInit {
   voltar(){
     this.router.navigate(["/home"]);
   }
+
+  submitForm(){
+    if(!this.animeForm.valid){
+      this.alert.presentAlert("Erro", "Erro ao Preencher os Campos");
+      return false;
+    }else{
+      this.addanime();
+      return true;
+    }
+  }
 }
