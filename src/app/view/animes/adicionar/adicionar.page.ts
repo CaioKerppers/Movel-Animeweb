@@ -15,13 +15,9 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 export class AdicionarPage implements OnInit {
 
   animeForm: FormGroup;
-  temporada!: number;
-  nome!: string;
-  datalancamento!: Date;
   imagem: any;
-  episodios!: number;
-  estudio!: string;
   user!: any;
+  textoBotao: string = "Adicionar"
 
   constructor(private router : Router,
     private firebase: FirebaseService,
@@ -48,13 +44,13 @@ export class AdicionarPage implements OnInit {
     })
   }
 
-  addanime(){
+  addanime(form: FormGroup){
     let novo : Anime = new Anime(
-      this.animeForm.value['nome'],
-      this.animeForm.value['estudio'],
-      this.animeForm.value['datalancamento'],
-      this.animeForm.value['temporadas'],
-      this.animeForm.value['episodios'],
+      form.value['nome'],
+      form.value['estudio'],
+      form.value['datalancamento'],
+      form.value['temporadas'],
+      form.value['episodios'],
       );
     novo.uid = this.user.uid;
     if(this.imagem){
@@ -73,15 +69,5 @@ export class AdicionarPage implements OnInit {
 
   voltar(){
     this.router.navigate(["/home"]);
-  }
-
-  submitForm(){
-    if(!this.animeForm.valid){
-      this.alert.presentAlert("Erro", "Erro ao Preencher os Campos");
-      return false;
-    }else{
-      this.addanime();
-      return true;
-    }
   }
 }

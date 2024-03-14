@@ -7,28 +7,12 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <form [formGroup]="animeForm" (ngSubmit)="submitForm()">
-        <ion-item>
-          <ion-input label="Nome" placeholder="Insira o nome" formControlName="nome"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Estudio" placeholder="Insira o nome do estudio" formControlName="estudio"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="date" label="Data Lançamento" placeholder="Data de Lançamento" formControlName="datalancamento"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="number" label="Temporadas" placeholder="Nº de temporadas" formControlName="temporadas"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="number" label="Episodios" placeholder="Nº de episodios" formControlName="episodios"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-button size="default" color="success" shape="round" >
-            <input type="file"  (change)="uploadFile($event.target)" />
-          </ion-button>
-        </ion-item>
-        <ion-button expand="block" type="submit">Adicionar Anime</ion-button>
-    </form>
+    <app-anime-input
+    [animeForm]="animeForm"
+    [botao]="textoBotao"
+    (submit)=addanime($event)></app-anime-input>
+    <ion-button size="default" color="success" shape="round" >
+      <input type="file" (change)="uploadFile($event.target)" />
+    </ion-button>
   </ion-list>
 </ion-content>

@@ -1,1 +1,18 @@
-
+<form [formGroup]="animeForm" (ngSubmit)="submitForm()">
+  <ion-item>
+    <ion-input label="Nome" placeholder="Insira o nome" formControlName="nome"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input label="Estudio" placeholder="Insira o nome do estudio" formControlName="estudio"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="date" label="Data Lançamento" placeholder="Data de Lançamento" formControlName="datalancamento"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="number" label="Temporadas" placeholder="Nº de temporadas" formControlName="temporadas"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="number" label="Episodios" placeholder="Nº de episodios" formControlName="episodios"></ion-input>
+  </ion-item>
+  <ion-button expand="block" type="submit">{{botao}} Anime</ion-button>
+</form>
