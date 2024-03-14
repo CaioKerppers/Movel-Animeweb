@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
-import { Catalogo } from 'src/app/model/entities/Catalogo';
+import { Anime } from 'src/app/model/entities/Anime';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -9,7 +10,7 @@ import { Catalogo } from 'src/app/model/entities/Catalogo';
 })
 export class SearchPage implements OnInit {
   @ViewChild('searchInput') sInput;
-  animes: Catalogo[] = [];
+  animes: Anime[] = [];
   query: string;
   isLoading: boolean = false;
   model: any = {
@@ -17,11 +18,15 @@ export class SearchPage implements OnInit {
     title: 'Nenhum anime encontrado.'
   };
 
-  constructor(private firebaseService: FirebaseService) {
+  constructor(private firebaseService: FirebaseService,private router : Router) {
     setTimeout(() => { this.sInput.setFocus(); }, 500);
   }
 
   ngOnInit() {
+  }
+
+  paraHome() {
+    this.router.navigate(['/home']);
   }
 
   async onSearchChange(event) {
@@ -30,7 +35,7 @@ export class SearchPage implements OnInit {
     this.animes = [];
     if (this.query.length > 0) {
       this.isLoading = true;
-      this.firebaseService.search(this.query).subscribe((results: Catalogo[]) => {
+      this.firebaseService.search(this.query).subscribe((results: Anime[]) => {
         this.animes = results;
         console.log(this.animes);
         this.isLoading = false;

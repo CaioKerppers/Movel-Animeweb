@@ -1,0 +1,11 @@
+<ion-item>
+    <ion-avatar *ngIf="anime.downloadURL != null">
+        <img src="{{anime.downloadURL}}"/>
+    </ion-avatar>
+    <ion-avatar *ngIf="anime.downloadURL == null">
+        <img src="assets/avatar.png"/>
+    </ion-avatar>
+    <ion-label text-wrap style="margin-left: 10px">
+        <h2>{{anime.nome}}</h2>
+    </ion-label>
+</ion-item>

@@ -1,23 +1,13 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>signin</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">signin</ion-title>
+      <ion-title>Logar</ion-title>
     </ion-toolbar>
   </ion-header>
 </ion-content>
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Logar</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <ion-list>
+
+<ion-content color="tertiary">
+  <ion-list color="primary">
     <form [formGroup]="formLogar" (ngSubmit)="submitForm()">
       <ion-item>
         <ion-label position="floating">Email</ion-label>
