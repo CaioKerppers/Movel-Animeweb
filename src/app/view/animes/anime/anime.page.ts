@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Catalogo } from 'src/app/model/entities/Catalogo';
+import { Anime } from 'src/app/model/entities/Anime';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 
 @Component({
@@ -12,8 +12,8 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 export class AnimePage implements OnInit {
 
   id! : string;
-  catalogo!: Catalogo;
-  temporada!: number;
+  anime!: Anime;
+  temporadas!: number;
   nome!: string;
   datalancamento!: Date;
   episodios!: number;
@@ -26,24 +26,24 @@ export class AnimePage implements OnInit {
   constructor(private alertController: AlertController,  private router: Router, private firebase: FirebaseService) { }
 
   ngOnInit() {
-    this.catalogo = history.state.catalogo;
-    this.temporada = this.catalogo.temporada;
-    this.nome = this.catalogo.nome;
-    this.datalancamento = this.catalogo.datalancamento;
-    this.episodios = this.catalogo.episodios;
-    this.estudio = this.catalogo.estudio;
-    this.id = this.catalogo.id
-    this.downloadURL = this.catalogo.downloadURL;
+    this.anime = history.state.anime;
+    this.temporadas = this.anime.temporadas;
+    this.nome = this.anime.nome;
+    this.datalancamento = this.anime.datalancamento;
+    this.episodios = this.anime.episodios;
+    this.estudio = this.anime.estudio;
+    this.id = this.anime.id
+    this.downloadURL = this.anime.downloadURL;
   }
 
   editar(){
-    let novo: Catalogo = new Catalogo(this.nome, this.temporada, this.datalancamento, this.episodios, this.estudio, this.id);
-    novo.id = this.catalogo.id;
+    let novo: Anime = new Anime(this.nome, this.estudio, this.datalancamento, this.temporadas, this.episodios);
+    novo.id = this.anime.id;
     novo.uid = this.user.uid;
     if(this.imagem){
       this.firebase.uploadImage(this.imagem, novo);
     }else{
-      novo.downloadURL = this.catalogo.downloadURL;
+      novo.downloadURL = this.anime.downloadURL;
       this.firebase.update(novo);
     }
     this.router.navigate(["/home"]);
@@ -63,7 +63,7 @@ export class AnimePage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Animes',
       subHeader: 'ATENÇÃO',
-      message: 'Deseja mesmo excluir o Catalogo?',
+      message: 'Deseja mesmo excluir o anime?',
       buttons: [{
         text: 'Cancel',
         role: 'cancel'
@@ -86,7 +86,7 @@ export class AnimePage implements OnInit {
   }
 
   excluir(){
-    this.firebase.delete(this.catalogo);
+    this.firebase.delete(this.anime);
     this.router.navigate(['/home']);
   }
 

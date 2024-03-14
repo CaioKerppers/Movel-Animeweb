@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { Catalogo } from 'src/app/model/entities/Catalogo';
+import { Anime } from 'src/app/model/entities/Anime';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 
@@ -10,28 +9,38 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  catalogo: Catalogo[] = [];
+export class HomePage implements OnInit{
+  animes: Anime[] = [];
   user: any;
+  isLoading: boolean = false;
 
-  constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService, private auth: AuthService) {
+  constructor(private router: Router, private firebase: FirebaseService, private auth: AuthService) {
     this.user = this.auth.getUsuarioLogado();
+  }
+
+  ngOnInit(): void {
+    this.isLoading = true;
     this.firebase.read(this.user.uid).subscribe(res =>{
-      this.catalogo = res.map(catalogo =>{
+      this.animes = res.map(anime =>{
         return{
-          id: catalogo.payload.doc.id,
-          ... catalogo.payload.doc.data() as any
-        }as Catalogo;
-      })
+          id: anime.payload.doc.id,
+          ... anime.payload.doc.data() as any
+        }as Anime;
+      });
+      this.isLoading = false;
     })
+  }
+
+  redirecionarParaPesquisa() {
+    this.router.navigate(['/search']);
   }
 
   RedirecionarParaAdicionar(){
     this.router.navigate(['/adicionar']);
   }
 
-  AnimeDetalhes(catalogo : Catalogo){
-    this.router.navigateByUrl("/anime", {state : {catalogo:catalogo}});
+  AnimeDetalhes(anime : Anime){
+    this.router.navigateByUrl("/anime", {state : {anime:anime}});
   }
 
   logout(){
