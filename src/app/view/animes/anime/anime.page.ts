@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Alert } from 'src/app/common/alert.service';
@@ -41,6 +41,13 @@ export class AnimePage implements OnInit {
   }
 
   ngOnInit() {
+    this.animeForm = this.formBuilder.group({
+      nome: ['', [Validators.required]],
+      estudio: ['', [Validators.required]],
+      datalancamento: ['', [Validators.required]],
+      temporadas: ['', [Validators.required]],
+      episodios: ['', [Validators.required]]
+    })
   }
 
   editar(form: FormGroup){
