@@ -9,8 +9,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" color="tertiary">
-  <ion-card *ngIf="anime">
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="anime && edicao">
     <ion-card-header>
 
       <ion-card-title *ngIf="edicao">
@@ -61,11 +61,18 @@
       <ion-input placeholder="Insira a quantidade de episodios" type="number"[(ngModel)]="episodios">Nº Epísodios: <ion-icon name="pencil"></ion-icon></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-toggle (ionChange)="habilitar()">Habilitar Edição</ion-toggle>
-    </ion-item>
 
-    <ion-button expand="block" (click)="editar()" *ngIf="!edicao">Salvar</ion-button>
-    <ion-button expand="block" color="danger" (click)="confirmAlert()" *ngIf="!edicao">Excluir</ion-button>
+    <ion-button expand="block" *ngIf="!edicao">Salvar</ion-button>
   </ion-card>
+  
+  <ion-item>
+    <ion-toggle (ionChange)="habilitar()">Habilitar Edição</ion-toggle>
+  </ion-item>
+
+  <app-anime-input
+    *ngIf="!edicao"
+    [animeForm]="animeForm"
+    [botao]="textoBotao"
+    (submit)="editar($event)"></app-anime-input>
+    <ion-button expand="block" color="danger" (click)="confirmAlert()" *ngIf="!edicao">Excluir</ion-button>
 </ion-content>

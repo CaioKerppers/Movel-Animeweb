@@ -4,21 +4,26 @@ import { IonicModule } from '@ionic/angular';
 import { AnimesComponent } from './animes/animes.component';
 import { EmptyScreenComponent } from './empty-screen/empty-screen.component';
 import { LoadingComponent } from './loading/loading.component';
+import { AnimeInputComponent } from './anime-input/anime-input.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [AnimesComponent,
     EmptyScreenComponent,
-    LoadingComponent],
+    LoadingComponent,
+    AnimeInputComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
   ],
   exports: [
     AnimesComponent,
     EmptyScreenComponent,
-    LoadingComponent
+    LoadingComponent,
+    AnimeInputComponent
   ]
 })
 export class ComponentsModule { }

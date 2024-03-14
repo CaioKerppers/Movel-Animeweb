@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Alert } from 'src/app/common/alert.service';
 import { Anime } from 'src/app/model/entities/Anime';
+import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 
 @Component({
@@ -22,11 +25,27 @@ export class AnimePage implements OnInit {
   downloadURL: any;
   imagem! : any;
   user! : any;
+  animeForm: FormGroup;
+  textoBotao: string = "Editar";
 
-  constructor(private alertController: AlertController,  private router: Router, private firebase: FirebaseService) { }
+  constructor(private alertController: AlertController,
+    private router: Router,
+    private firebase: FirebaseService,
+    private formBuilder: FormBuilder,
+    private auth: AuthService,
+    private alert: Alert) {
+    this.user = this.auth.getUsuarioLogado();
+    this.anime = history.state.anime;
+    this.animeForm = new FormGroup({
+      nome: new FormControl(this.anime.nome),
+      estudio: new FormControl(this.anime.estudio),
+      datalancamento: new FormControl(this.anime.datalancamento),
+      temporadas: new FormControl(this.anime.temporadas),
+      episodios: new FormControl(this.anime.episodios)
+    });
+  }
 
   ngOnInit() {
-    this.anime = history.state.anime;
     this.temporadas = this.anime.temporadas;
     this.nome = this.anime.nome;
     this.datalancamento = this.anime.datalancamento;
@@ -34,10 +53,17 @@ export class AnimePage implements OnInit {
     this.estudio = this.anime.estudio;
     this.id = this.anime.id
     this.downloadURL = this.anime.downloadURL;
+
   }
 
-  editar(){
-    let novo: Anime = new Anime(this.nome, this.estudio, this.datalancamento, this.temporadas, this.episodios);
+  editar(form: FormGroup){
+    let novo: Anime = new Anime(
+      form.value['nome'],
+      form.value['estudio'],
+      form.value['datalancamento'],
+      form.value['temporadas'],
+      form.value['episodios'],
+      );
     novo.id = this.anime.id;
     novo.uid = this.user.uid;
     if(this.imagem){
@@ -46,17 +72,8 @@ export class AnimePage implements OnInit {
       novo.downloadURL = this.anime.downloadURL;
       this.firebase.update(novo);
     }
+    this.alert.presentAlert("Sucesso", "Anime Editado");
     this.router.navigate(["/home"]);
-  }
-
-  async presentAlert(subHeader : string, message : string) {
-    const alert = await this.alertController.create({
-      header: 'Animes',
-      subHeader: subHeader,
-      message: message,
-      buttons: ['OK'],
-    });
-    await alert.present();
   }
 
   async confirmAlert(){
