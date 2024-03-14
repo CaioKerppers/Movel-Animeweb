@@ -14,65 +14,47 @@
     <ion-card-header>
 
       <ion-card-title *ngIf="edicao">
-        {{nome}}
-      </ion-card-title>
-    
-      <ion-card-title *ngIf="!edicao">
-        <ion-input placeholder="Insira o nome" [(ngModel)]="nome">Nome <ion-icon name="pencil"></ion-icon></ion-input>
+        {{anime.nome}}
       </ion-card-title>
 
       <ion-card-subtitle *ngIf="edicao">
-        {{estudio}}
-      </ion-card-subtitle>
-
-      <ion-card-subtitle *ngIf="!edicao">
-        <ion-input placeholder="Insira o nome do estudio" [(ngModel)]="estudio">Estudio <ion-icon name="pencil"></ion-icon></ion-input>
+        {{anime.estudio}}
       </ion-card-subtitle>
 
     </ion-card-header>
 
     <ion-card-content text-center>
-      <img [src]="downloadURL">
+      <img [src]="anime.downloadURL">
     </ion-card-content>
 
-    <ion-item *ngIf="!edicao">
-      <ion-button size="default" color="success" shape="round" disabled="{{edicao}}">
-        <input type="file" (change)="uploadFile($event.target)" />
-      </ion-button>
+    <ion-item lines="none">
+      <ion-label>Nº Temporadas: {{anime.temporadas}}</ion-label>
     </ion-item>
 
-    <ion-item>
-      <ion-input placeholder="Insira a data de lençamento" type="date" [(ngModel)]="datalancamento" disabled="{{edicao}}"> Data de Lançamento <ion-icon name="pencil" *ngIf="!edicao"></ion-icon></ion-input>
-    </ion-item>
-
-    <ion-item lines="none" *ngIf="edicao">
-      <ion-label>Nº Temporadas: {{temporadas}}</ion-label>
-    </ion-item>
-
-    <ion-item lines="none" *ngIf="!edicao">
-      <ion-input placeholder="Insira a quantidade de temporadas" type="number" [(ngModel)]="temporadas">Nº Temporadas  <ion-icon name="pencil"></ion-icon></ion-input>
-    </ion-item>
-
-    <ion-item lines="none" *ngIf="edicao">
-      <ion-label>Nº Epísodios: {{episodios}}</ion-label>
-    </ion-item>
-
-    <ion-item lines="none" *ngIf="!edicao">
-      <ion-input placeholder="Insira a quantidade de episodios" type="number"[(ngModel)]="episodios">Nº Epísodios: <ion-icon name="pencil"></ion-icon></ion-input>
+    <ion-item lines="none">
+      <ion-label>Nº Epísodios: {{anime.episodios}}</ion-label>
     </ion-item>
 
 
     <ion-button expand="block" *ngIf="!edicao">Salvar</ion-button>
   </ion-card>
-  
+
   <ion-item>
     <ion-toggle (ionChange)="habilitar()">Habilitar Edição</ion-toggle>
+  </ion-item>
+
+  <ion-item *ngIf="!edicao">
+    <ion-button size="default" color="success" shape="round" disabled="{{edicao}}">
+      <input type="file" (change)="uploadFile($event.target)" />
+    </ion-button>
   </ion-item>
 
   <app-anime-input
     *ngIf="!edicao"
     [animeForm]="animeForm"
     [botao]="textoBotao"
-    (submit)="editar($event)"></app-anime-input>
+    (submit)="editar($event)">
+  </app-anime-input>
+
     <ion-button expand="block" color="danger" (click)="confirmAlert()" *ngIf="!edicao">Excluir</ion-button>
 </ion-content>

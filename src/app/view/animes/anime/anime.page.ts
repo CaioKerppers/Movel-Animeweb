@@ -14,46 +14,33 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 })
 export class AnimePage implements OnInit {
 
-  id! : string;
   anime!: Anime;
-  temporadas!: number;
-  nome!: string;
-  datalancamento!: Date;
-  episodios!: number;
-  estudio!: string;
   edicao: boolean = true;
-  downloadURL: any;
   imagem! : any;
   user! : any;
   animeForm: FormGroup;
   textoBotao: string = "Editar";
 
-  constructor(private alertController: AlertController,
+  constructor(
+    private alertController: AlertController,
     private router: Router,
     private firebase: FirebaseService,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private alert: Alert) {
-    this.user = this.auth.getUsuarioLogado();
-    this.anime = history.state.anime;
-    this.animeForm = new FormGroup({
-      nome: new FormControl(this.anime.nome),
-      estudio: new FormControl(this.anime.estudio),
-      datalancamento: new FormControl(this.anime.datalancamento),
-      temporadas: new FormControl(this.anime.temporadas),
-      episodios: new FormControl(this.anime.episodios)
-    });
+    private alert: Alert
+    ){
+      this.user = this.auth.getUsuarioLogado();
+      this.anime = history.state.anime;
+      this.animeForm = new FormGroup({
+        nome: new FormControl(this.anime.nome),
+        estudio: new FormControl(this.anime.estudio),
+        datalancamento: new FormControl(this.anime.datalancamento),
+        temporadas: new FormControl(this.anime.temporadas),
+        episodios: new FormControl(this.anime.episodios)
+      });
   }
 
   ngOnInit() {
-    this.temporadas = this.anime.temporadas;
-    this.nome = this.anime.nome;
-    this.datalancamento = this.anime.datalancamento;
-    this.episodios = this.anime.episodios;
-    this.estudio = this.anime.estudio;
-    this.id = this.anime.id
-    this.downloadURL = this.anime.downloadURL;
-
   }
 
   editar(form: FormGroup){
