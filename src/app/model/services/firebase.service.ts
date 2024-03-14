@@ -9,18 +9,18 @@ import { Anime } from '../entities/Anime';
   providedIn: 'root'
 })
 export class FirebaseService {
-  private PATH: string = 'catalogos';
+  private PATH: string = 'animes';
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
 
   create(anime: Anime){
-    return this.firestore.collection(this.PATH).add({nome: anime.nome, temporada: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, uid: anime.uid});
+    return this.firestore.collection(this.PATH).add({nome: anime.nome, temporadas: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, uid: anime.uid});
   }
 
   createWithAvatar(anime: Anime){
     return this.firestore.collection(this.PATH)
-    .add({nome: anime.nome, temporada: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, downloadURL: anime.downloadURL});
+    .add({nome: anime.nome, temporadas: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, downloadURL: anime.downloadURL});
   }
 
   read(uid: string){
@@ -29,12 +29,12 @@ export class FirebaseService {
   }
 
   update(anime: Anime){
-    return this.firestore.collection(this.PATH).doc(anime.id).update({nome: anime.nome, temporada: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio: anime.estudio, uid:anime.uid});
+    return this.firestore.collection(this.PATH).doc(anime.id).update({nome: anime.nome, temporadas: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio: anime.estudio, uid:anime.uid});
   }
 
   updateWithAvatar(anime: Anime, id: string){
     return this.firestore.collection(this.PATH).doc(id)
-    .update({nome: anime.nome, temporada: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, uid: anime.uid, downloadURL: anime.downloadURL});
+    .update({nome: anime.nome, temporadas: anime.temporadas, datalancamento: anime.datalancamento, episodios: anime.episodios, estudio:anime.estudio, uid: anime.uid, downloadURL: anime.downloadURL});
   }
 
   delete(anime: Anime){
